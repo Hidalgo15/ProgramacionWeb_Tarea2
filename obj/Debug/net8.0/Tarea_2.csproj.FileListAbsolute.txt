@@ -30,3 +30,4 @@ C:\Programacion web, trabajos\Tarea_2\obj\Debug\net8.0\ref\Tarea_2.dll
 C:\Programacion web, trabajos\Tarea_2\obj\Debug\net8.0\scopedcss\Components\Layout\Tarea2Layout.razor.rz.scp.css
 C:\Programacion web, trabajos\Tarea_2\obj\Debug\net8.0\scopedcss\Components\Pages\Acerca-de.razor.rz.scp.css
 C:\Programacion web, trabajos\Tarea_2\obj\Debug\net8.0\scopedcss\Components\Pages\Home.razor.rz.scp.css
+C:\Programacion web, trabajos\Tarea_2\obj\Debug\net8.0\Tarea_2.sourcelink.json
