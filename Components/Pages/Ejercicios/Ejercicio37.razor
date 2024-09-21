@@ -1,0 +1,30 @@
+@page "/ejercicio37"
+@rendermode InteractiveServer
+
+<PageTitle>Ejercicio37</PageTitle>
+
+<div>
+    <label for="base">Ingrese la base:</label>
+    <input type="number" id="base" @bind="baseNumero" />
+</div>
+
+<div>
+    <br>
+    <label for="exponente">Ingrese el exponente:</label>
+    <input type="number" id="exponente" @bind="exponenteNumero" />
+</div>
+
+<button @onclick="CalcularPotencia">Calcular</button>
+
+<p>El resultado es: @resultado</p>
+
+@code {
+    private int baseNumero;
+    private int exponenteNumero;
+    private int resultado;
+
+    private void CalcularPotencia()
+    {
+        resultado = (int)Math.Pow(baseNumero, exponenteNumero);
+    }
+}

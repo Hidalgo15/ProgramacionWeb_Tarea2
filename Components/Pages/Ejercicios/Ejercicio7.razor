@@ -1,0 +1,34 @@
+@page "/ejercicio7"
+@rendermode InteractiveServer 
+
+<PageTitle>Ejercicio7</PageTitle>
+
+
+<div class="form-group">
+    <label for="txtCaracter">Ingresa un carácter:</label>
+    <input type="text" class="form-control" id="txtCaracter" @bind="caracter" maxlength="1" />
+</div>
+
+<div class="form-group">
+    <br>
+    <button class="btn btn-primary calcular-btn" @onclick="CalcularCodigoASCII">Calcular</button>
+    <p class="digitos">El código ASCII de '@caracter' es: @codigoASCII</p>
+</div>
+
+@code {
+    private string caracter = "";
+    private int codigoASCII = 0;
+
+    private void CalcularCodigoASCII()
+    {
+        if (caracter.Length == 1)
+        {
+            codigoASCII = (int)caracter[0];
+        }
+        else
+        {
+            // Manejar el caso donde se ingresa más de un carácter
+            Console.WriteLine("Por favor, ingresa solo un carácter.");
+        }
+    }
+}

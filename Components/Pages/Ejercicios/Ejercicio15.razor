@@ -1,0 +1,32 @@
+@page "/ejercicio15"
+@rendermode InteractiveServer 
+
+<PageTitle>Ejercicio15</PageTitle>
+
+
+<div class="form-group">
+    <label for="txtNumero1">Ingresa el primer número:</label>
+    <input type="number" class="form-control" id="txtNumero1" @bind="numero1" />
+</div>
+
+<div class="form-group">
+    <label for="txtNumero2">Ingresa el segundo número:</label>
+    <input type="number" class="form-control" id="txtNumero2" @bind="numero2" min="1" />
+</div>
+
+<div class="form-group">
+    <br>
+    <button class="btn btn-primary calcular-btn" @onclick="VerificarMultiplo">Verificar</button>
+    <p class="resultado">El número @numero1 es @(esMultiplo ? "múltiplo" : "no múltiplo") de @numero2.</p>
+</div>
+
+@code {
+    private int numero1 = 0;
+    private int numero2 = 0;
+    private bool esMultiplo = false;
+
+    private void VerificarMultiplo()
+    {
+        esMultiplo = numero1 % numero2 == 0;
+    }
+}

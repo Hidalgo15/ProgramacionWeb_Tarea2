@@ -1,0 +1,48 @@
+@page "/ejercicio31"
+@rendermode InteractiveServer 
+
+<PageTitle>Ejercicio31</PageTitle>
+
+<div>
+    <label for="numeros">Ingrese 10 números separados por comas:</label>
+    <input type="text" id="numeros" @bind="numerosInput" />
+</div>
+
+<button @onclick="CalcularPromedio">Calcular</button>
+
+<p>El promedio de los números es: @promedio</p>
+
+@code {
+    private string numerosInput ="";
+    private int[] numeros = new int[10];
+    private int promedio;
+
+    private void CalcularPromedio()
+    {
+        // Convertir la cadena de entrada a un arreglo de enteros
+        var numerosStr = numerosInput.Split(',');
+        for (int i = 0; i < numeros.Length; i++)
+        {
+            if (int.TryParse(numerosStr[i], out numeros[i]))
+            {
+                // Conversión exitosa
+            }
+            else
+            {
+                // Manejar error de conversión
+                Console.WriteLine("Error al convertir un número");
+                return;
+            }
+        }
+
+        // Calcular la suma de los números
+        int suma = 0;
+        foreach (int numero in numeros)
+        {
+            suma += numero;
+        }
+
+        // Calcular el promedio (redondeado hacia abajo)
+        promedio = suma / numeros.Length;
+    }
+}

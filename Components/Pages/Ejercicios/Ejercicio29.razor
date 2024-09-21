@@ -1,0 +1,57 @@
+@page "/ejercicio29"
+@rendermode InteractiveServer 
+
+<PageTitle>Ejercicio29</PageTitle>
+
+<div>
+    <label for="numeros">Ingrese 10 números separados por comas:</label>
+    <input type="text" id="numeros" @bind="numerosInput" />
+</div>
+
+<button @onclick="ContarFibonacci">Contar</button>
+
+<p>Hay @cantidadFibonacci números de Fibonacci en el vector.</p>
+
+@code {
+    private string numerosInput ="";
+    private int[] numeros = new int[10];
+    private int cantidadFibonacci;
+
+    private void ContarFibonacci()
+    {
+        // Convertir la cadena de entrada a un arreglo de enteros
+        var numerosStr = numerosInput.Split(',');
+        for (int i = 0; i < numeros.Length; i++)
+        {
+            if (int.TryParse(numerosStr[i], out numeros[i]))
+            {
+                // Conversión exitosa
+            }
+            else
+            {
+                // Manejar error de conversión
+                Console.WriteLine("Error al convertir un número");
+                return;
+            }
+        }
+
+        // Generar los 30 primeros números de Fibonacci
+        int[] fibonacci = new int[30];
+        fibonacci[0] = 0;
+        fibonacci[1] = 1;
+        for (int i = 2; i < fibonacci.Length; i++)
+        {
+            fibonacci[i] = fibonacci[i - 1] + fibonacci[i - 2];
+        }
+
+        // Contar los números del vector que están en la secuencia de Fibonacci
+        cantidadFibonacci = 0;
+        foreach (int numero in numeros)
+        {
+            if (fibonacci.Contains(numero))
+            {
+                cantidadFibonacci++;
+            }
+        }
+    }
+}

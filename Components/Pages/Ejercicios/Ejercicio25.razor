@@ -1,0 +1,48 @@
+@page "/ejercicio25"
+@rendermode InteractiveServer 
+
+<PageTitle>Ejercicio25</PageTitle>
+
+
+<div>
+    <label for="numero">Ingrese un número:</label>
+    <input type="number" @bind="numero" />
+</div>
+
+<div>
+    <label for="posicion">Ingrese la posición (1-5):</label>
+    <input type="number" @bind="posicion" min="1" max="5" />
+</div>
+
+<button @onclick="ObtenerDigito">Obtener dígito</button>
+
+<p>El dígito en la posición @posicion es: @digito</p>
+
+@code {
+    private int numero;
+    private int posicion;
+    private int digito;
+static int ObtenerDigitoEnPosicion(int numero, int posicion)
+    {
+        // Validación: Asegurarse que la posición esté dentro del rango válido
+        if (posicion <= 0 || posicion > 5)
+        {
+            return -1; // O lanzar una excepción
+        }
+
+        string numeroStr = numero.ToString();
+        if (posicion > numeroStr.Length)
+        {
+            return -1; // O lanzar una excepción
+        }
+
+        char digitoChar = numeroStr[posicion - 1]; // Indices en C# empiezan desde 0
+        return int.Parse(digitoChar.ToString());
+    }
+    private void ObtenerDigito()
+    {
+        digito = ObtenerDigitoEnPosicion(numero, posicion);
+    }
+
+
+}

@@ -1,0 +1,36 @@
+@page "/ejercicio9"
+@rendermode InteractiveServer 
+
+<PageTitle>Ejercicio9</PageTitle>
+
+<div class="form-group">
+    <label for="txtNumero">Ingresa un número:</label>
+    <input type="number" class="form-control" id="txtNumero" @bind="numero" min="0" />
+</div>
+
+<div class="form-group">
+    <br>
+    <button class="btn btn-primary calcular-btn" @onclick="CalcularFactorial">Calcular factorial</button>
+    <p class="resultado">El factorial de @numero es: @factorial</p>
+</div>
+
+@code {
+    private int numero = 0;
+    private long factorial = 1; // Usamos long para manejar números más grandes
+
+    private void CalcularFactorial()
+    {
+        if (numero < 0)
+        {
+            factorial = -1; // Indicar que el factorial no está definido para números negativos
+        }
+        else
+        {
+            factorial = 1;
+            for (int i = 1; i <= numero; i++)
+            {
+                factorial *= i;
+            }
+        }
+    }
+}

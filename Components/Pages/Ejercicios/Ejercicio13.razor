@@ -1,0 +1,44 @@
+@page "/ejercicio13"
+@rendermode InteractiveServer 
+
+<PageTitle>Ejercicio13</PageTitle>
+
+
+<div class="form-group">
+    <label for="txtNumero">Ingresa un número:</label>
+    <input type="number" class="form-control" id="txtNumero" @bind="numero" />
+</div>
+
+<div class="form-group">
+    <label for="txtDigito">Ingresa un dígito:</label>
+    <input type="number" class="form-control" id="txtDigito" @bind="digito" min="0" max="9" />
+</div>
+
+<div class="form-group">
+    <br>
+    <button class="btn btn-primary calcular-btn" @onclick="ContarDigitos">Contar</button>
+    <p class="resultado">El dígito @digito aparece @cantidadVeces veces en el número @numero.</p>
+</div>
+
+@code {
+    private int numero = 0;
+    private int digito = 0;
+    private int cantidadVeces = 0;
+
+    private void ContarDigitos()
+    {
+        int numTemporal = numero; // Creamos una copia local del número
+
+        cantidadVeces = 0; // Reiniciamos el contador
+
+        while (numTemporal > 0)
+        {
+            int ultimoDigito = numTemporal % 10;
+            if (ultimoDigito == digito)
+            {
+                cantidadVeces++;
+            }
+            numTemporal /= 10;
+        }
+    }
+}

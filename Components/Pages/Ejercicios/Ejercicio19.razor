@@ -1,0 +1,27 @@
+@page "/ejercicio19"
+@rendermode InteractiveServer 
+
+<PageTitle>Ejercicio19</PageTitle>
+
+
+<div class="form-group">
+    <label for="txtNumero">Ingresa un número entero:</label>
+    <input type="number" class="form-control" id="txtNumero" @bind="numero" />
+</div>
+
+<div class="form-group">
+    <br>
+    <button class="btn btn-primary calcular-btn" @onclick="VerificarDigitos">Verificar</button>
+    <p class="resultado">El resultado es: @resultado</p>
+</div>
+
+@code {
+    private int numero = 0;
+    private int resultado = 0;
+
+    private void VerificarDigitos()
+    {
+        // Verificamos si el número es mayor o igual a 100
+        resultado = numero >= 100 ? 1 : 0;
+    }
+}

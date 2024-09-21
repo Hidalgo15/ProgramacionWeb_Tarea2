@@ -1,0 +1,47 @@
+@page "/ejercicio49"
+@rendermode InteractiveServer
+
+<PageTitle>Ejercicio49</PageTitle>
+
+<div>
+    <label for="matriz">Ingrese los elementos de la matriz separados por comas (5 filas de 5 elementos cada una):</label>
+    <input type="text" id="matriz" @bind="matrizInput" />
+</div>
+
+<button @onclick="EncontrarModa">Encontrar Moda</button>
+
+<p>La moda de la matriz es: @moda</p>
+
+@code {
+    private string matrizInput ="";
+    private int[,] matriz = new int[5, 5];
+    private int moda;
+
+   @code {
+    // ... (resto de tu código)
+
+    private void EncontrarModa()
+    {
+        // ... (conversión de la cadena a matriz)
+
+        // Crear un diccionario para contar las ocurrencias de cada elemento
+        var frecuencia = new Dictionary<int, int>();
+
+        // Recorrer la matriz y contar las ocurrencias
+        foreach (var numero in matriz)
+        {
+            if (frecuencia.ContainsKey(numero))
+            {
+                frecuencia[numero]++;
+            }
+            else
+            {
+                frecuencia[numero] = 1;
+            }
+        }
+
+        // Encontrar el elemento con la mayor frecuencia
+        int moda = frecuencia.OrderByDescending(x => x.Value).First().Key;
+    }
+}
+}

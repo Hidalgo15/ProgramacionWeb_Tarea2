@@ -1,0 +1,42 @@
+@page "/ejercicio3"
+@rendermode InteractiveServer 
+
+<PageTitle>Ejercicio3</PageTitle>
+
+
+<div class="form-group">
+    <label for="txtnumero">Ingresa un número:</label>
+    <input type="number" class="form-control" id="txtnumero" @bind="numero" />
+</div>
+
+<div class="form-group">
+    <br>
+    <button class="btn btn-primary calcular-btn" @onclick="Calcular">Calcular</button>
+    <p class="digitos">Tu número tiene @cantidadDigitos dígitos.</p>
+</div>
+
+@code {
+    private int numero = 0;
+    private int cantidadDigitos = 0;
+
+    private void Calcular()
+    {
+        cantidadDigitos = ContarDigitos(numero);
+    }
+
+    private int ContarDigitos(int numero)
+{
+    if (numero == 0)
+    {
+        return 1; // Un cero tiene un dígito
+    }
+
+    int contador = 0;
+    while (numero != 0)
+    {
+        numero /= 10; // Dividimos entre 10 para eliminar el último dígito
+        contador++;
+    }
+    return contador;
+}
+}

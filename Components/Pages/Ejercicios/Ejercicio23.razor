@@ -1,0 +1,52 @@
+@page "/ejercicio23"
+@rendermode InteractiveServer 
+
+<PageTitle>Ejercicio23</PageTitle>
+
+
+
+<div>
+    <label for="numero1">Ingrese el primer número:</label>
+    <input type="number" id="numero1" @bind="numero1" />
+</div>
+
+<div>
+    <label for="numero2">Ingrese el segundo número:</label>
+    <input type="number" id="numero2" @bind="numero2" />
+</div>
+
+<button @onclick="VerificarPrimo">Verificar</button>
+
+<p>@resultado</p>
+
+@code {
+    private int numero1;
+    private int numero2;
+    private int resultado; // Cambiamos el tipo de resultado a int
+
+    private void VerificarPrimo()
+    {
+    int diferencia = Math.Abs(numero1 - numero2);
+    resultado = EsPrimo(diferencia) ? 1 : 0;
+  }
+
+    private bool EsPrimo(int numero)
+    { 
+        
+        if (numero <= 1) return false;
+        if (numero <= 3) return true;
+        if (numero % 2 == 0 || numero % 3 == 0) return false;
+
+        for (int i = 5; i * i <= numero; i += 6)
+        {
+            if (numero % i == 0 || numero % (i + 2) == 0)
+            {
+                return false;
+            }
+        }
+
+        return true; 
+
+    }
+    
+}

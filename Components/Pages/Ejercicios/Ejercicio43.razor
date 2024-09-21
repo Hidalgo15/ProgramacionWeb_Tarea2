@@ -1,0 +1,72 @@
+@page "/ejercicio43"
+@rendermode InteractiveServer
+
+<PageTitle>Ejercicio43</PageTitle>
+
+<div>
+    <label for="matriz">Ingrese los elementos de la matriz separados por comas (3 filas de 4 elementos cada una):</label>
+    <input type="text" id="matriz" @bind="matrizInput" />
+</div>
+
+<button @onclick="ContarPrimos">Contar</button>
+
+<p>Hay @cantidadPrimos números primos en la matriz.</p>
+
+@code {
+    private string matrizInput ="";
+    private int[,] matriz = new int[3, 4];
+    private int cantidadPrimos;
+
+    private void ContarPrimos()
+    {
+        // Convertir la cadena de entrada a una matriz de enteros
+        var filas = matrizInput.Split(',');
+        for (int i = 0; i < matriz.GetLength(0); i++)
+        {
+            var elementos = filas[i].Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            for (int j = 0; j < matriz.GetLength(1); j++)
+            {
+                if (int.TryParse(elementos[j], out matriz[i, j]))
+                {
+                    // Conversión exitosa
+                }
+                else
+                {
+                    // Manejar error de conversión
+                    Console.WriteLine("Error al convertir un número");
+                    return;
+                }
+            }
+        }
+
+        // Contar los números primos
+        cantidadPrimos = 0;
+        for (int i = 0; i < matriz.GetLength(0); i++)
+        {
+            for (int j = 0; j < matriz.GetLength(1); j++)
+            {
+                if (EsPrimo(matriz[i, j]))
+                {
+                    cantidadPrimos++;
+                }
+            }
+        }
+    }
+
+    private bool EsPrimo(int numero)
+{
+    if (numero <= 1) return false;
+    if (numero <= 3) return true;
+    if (numero % 2 == 0 || numero % 3 == 0) return false;
+
+    for (int i = 5; i * i <= numero; i += 6)
+    {
+        if (numero % i == 0 || numero % (i + 2) == 0)
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+}

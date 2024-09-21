@@ -1,0 +1,50 @@
+@page "/ejercicio27"
+@rendermode InteractiveServer 
+
+<PageTitle>Ejercicio27</PageTitle>
+
+<div>
+    <label for="numeros">Ingrese 10 números separados por comas:</label>
+    <input type="text" id="numeros" @bind="numerosInput" />
+</div>
+
+<button @onclick="EncontrarPosicionMayor">Buscar</button>
+
+<p>La posición del número más grande es: @posicionMayor</p>
+
+@code {
+    private string numerosInput ="";
+    private int[] numeros = new int[10];
+    private int posicionMayor = -1;
+
+    private void EncontrarPosicionMayor()
+    {
+        // Convertir la cadena de entrada a un arreglo de enteros
+        var numerosStr = numerosInput.Split(',');
+        for (int i = 0; i < numeros.Length; i++)
+        {
+            if (int.TryParse(numerosStr[i], out numeros[i]))
+            {
+                // Conversión exitosa
+            }
+            else
+            {
+                // Manejar error de conversión
+                Console.WriteLine("Error al convertir un número");
+                return;
+            }
+        }
+
+        // Encontrar el índice del número más grande
+        int max = numeros[0];
+        posicionMayor = 0;
+        for (int i = 1; i < numeros.Length; i++)
+        {
+            if (numeros[i] > max)
+            {
+                max = numeros[i];
+                posicionMayor = i;
+            }
+        }
+    }
+}

@@ -1,0 +1,65 @@
+@page "/ejercicio35"
+@rendermode InteractiveServer
+
+<PageTitle>Ejercicio35</PageTitle>
+
+<div>
+    <label for="numeros">Ingrese 10 números separados por comas:</label>
+    <input type="text" id="numeros" @bind="numerosInput" />
+</div>
+
+<button @onclick="EncontrarMayorPrimoEn3">Buscar</button>
+
+<p>La posición del mayor número primo que termina en 3 es: @posicionMayorPrimoEn3</p>
+
+@code {
+    private string numerosInput ="";
+    private int[] numeros = new int[10];
+    private int posicionMayorPrimoEn3 = -1;
+
+    private void EncontrarMayorPrimoEn3()
+    {
+        // Convertir la cadena de entrada a un arreglo de enteros
+        var numerosStr = numerosInput.Split(',');
+        for (int i = 0; i < numeros.Length; i++)
+        {
+            if (int.TryParse(numerosStr[i], out numeros[i]))
+            {
+                // Conversión exitosa
+            }
+            else
+            {
+                // Manejar error de conversión
+                Console.WriteLine("Error al convertir un número");
+                return;
+            }
+        }
+
+        // Buscar el mayor número primo que termina en 3
+        int maxPrimoEn3 = -1;
+        for (int i = 0; i < numeros.Length; i++)
+        {
+            if (EsPrimo(numeros[i]) && numeros[i] % 10 == 3 && numeros[i] > maxPrimoEn3)
+            {
+                maxPrimoEn3 = numeros[i];
+                posicionMayorPrimoEn3 = i;
+            }
+        }
+    }
+private bool EsPrimo(int numero)
+{
+    if (numero <= 1) return false;
+    if (numero <= 3) return true;
+    if (numero % 2 == 0 || numero % 3 == 0) return false;
+
+    for (int i = 5; i * i <= numero; i += 6)
+    {
+        if (numero % i == 0 || numero % (i + 2) == 0)
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+}

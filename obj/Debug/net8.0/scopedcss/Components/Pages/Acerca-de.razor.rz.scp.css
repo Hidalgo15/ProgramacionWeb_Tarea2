@@ -1,0 +1,27 @@
+.text-center[b-u95tr9h3q7] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* Espacio entre los botones */
+}
+
+.btn i[b-u95tr9h3q7] {
+    margin-right: 8px;
+}
+
+.botonTelegram[b-u95tr9h3q7] {
+    background-color: lightblue;
+  
+}
+
+.botonWhatsapp[b-u95tr9h3q7] {
+    background-color: lightgreen;
+}
+
+.img-top-right[b-u95tr9h3q7] {
+    position: absolute;
+    top: 35px;
+    right: 250px; /* Ajusta este valor para controlar la distancia desde la derecha */
+    width: 150px;
+    margin-top: 210px;
+}

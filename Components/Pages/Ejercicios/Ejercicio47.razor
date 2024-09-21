@@ -1,0 +1,39 @@
+@page "/ejercicio47"
+@rendermode InteractiveServer
+
+<PageTitle>Ejercicio47</PageTitle>
+
+<div>
+    <label for="matriz">Ingrese los elementos de la matriz separados por comas (4 filas de 4 elementos cada una):</label>
+    <input type="text" id="matriz" @bind="matrizInput" />
+</div>
+
+<button @onclick="EncontrarColumnaMayorValor">Buscar</button>
+
+<p>El valor máximo se encuentra por primera vez en la columna: @columnaMayorValor</p>
+
+@code {
+    private string matrizInput ="";
+    private int[,] matriz = new int[4, 4];
+    private int columnaMayorValor = -1;
+
+    private void EncontrarColumnaMayorValor()
+    {
+        // Convertir la cadena de entrada a una matriz de enteros
+        // ... (Código similar al de ejemplos anteriores para convertir la cadena a matriz)
+
+        int maxValor = int.MinValue;
+
+        for (int i = 0; i < matriz.GetLength(0); i++)
+        {
+            for (int j = 0; j < matriz.GetLength(1); j++)
+            {
+                if (matriz[i, j] > maxValor)
+                {
+                    maxValor = matriz[i, j];
+                    columnaMayorValor = j + 1; // Sumamos 1 para que la columna empiece en 1 y no en 0
+                }
+            }
+        }
+    }
+}

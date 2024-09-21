@@ -1,0 +1,62 @@
+@page "/ejercicio41"
+@rendermode InteractiveServer
+
+<PageTitle>Ejercicio41</PageTitle>
+
+<div>
+    <label for="numeros">Ingrese 10 números separados por comas:</label>
+    <input type="text" id="numeros" @bind="numerosInput" />
+</div>
+
+<div>
+    <br>
+    <label for="digito">Ingrese el dígito a buscar como penúltimo:</label>
+    <input type="number" id="digito" @bind="digitoBuscar" />
+</div>
+
+<button @onclick="ContarNumerosConPenultimoDigito">Contar</button>
+
+<p>Hay @cantidadNumerosConDigito números con el dígito @digitoBuscar como penúltimo.</p>
+
+@code {
+    private string numerosInput ="";
+    private int[] numeros = new int[10];
+    private int digitoBuscar;
+    private int cantidadNumerosConDigito;
+
+    private void ContarNumerosConPenultimoDigito()
+    {
+        // Convertir la cadena de entrada a un arreglo de enteros
+        var numerosStr = numerosInput.Split(',');
+        for (int i = 0; i < numeros.Length; i++)
+        {
+            if (int.TryParse(numerosStr[i], out numeros[i]))
+            {
+                // Conversión exitosa
+            }
+            else
+            {
+                // Manejar error de conversión
+                Console.WriteLine("Error al convertir un número");
+                return;
+            }
+        }
+
+        // Contar los números con el dígito especificado como penúltimo
+        cantidadNumerosConDigito = 0;
+        foreach (int numero in numeros)
+        {
+            if (TienePenultimoDigito(numero, digitoBuscar))
+            {
+                cantidadNumerosConDigito++;
+            }
+        }
+    }
+
+    private bool TienePenultimoDigito(int numero, int digito)
+    {
+        // Obtener el penúltimo dígito
+        int penultimoDigito = (numero / 10) % 10;
+        return penultimoDigito == digito;
+    }
+}

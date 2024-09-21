@@ -1,0 +1,28 @@
+@page "/ejercicio1"
+@rendermode InteractiveServer 
+
+<PageTitle>Ejercicio1</PageTitle>
+
+
+<div class="form-group">
+    <label for="txtnumero">Ingresa un número:</label>
+    <input type="number" class="form-control" id="txtnumero" @bind="numero" />
+</div>
+
+<div class="form-group">
+    
+    <br>
+    <button class="btn btn-primary calcular-btn" @onclick="Calcular">Calcular</button>
+    <p class="digitos">Tu último dígito: @ultimoDigito</p>
+    
+</div>
+
+@code{
+    private int numero = 0;
+    private string ultimoDigito = "";
+
+    private void Calcular(){
+        int ultimoDosDigitos = numero % 10;
+        ultimoDigito = ultimoDosDigitos.ToString("D2"); // Formateamos a string con dos dígitos
+    }
+}

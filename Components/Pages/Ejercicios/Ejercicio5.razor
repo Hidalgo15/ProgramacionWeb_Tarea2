@@ -1,0 +1,57 @@
+@page "/ejercicio5"
+@rendermode InteractiveServer 
+
+<PageTitle>Ejercicio5</PageTitle>
+
+
+<div class="form-group">
+    <label for="txtnumero">Ingresa un número:</label>
+    <input type="number" class="form-control" id="txtnumero" @bind="numero" />
+</div>
+
+<div class="form-group">
+    <br>
+    <button class="btn btn-primary calcular-btn" @onclick="Calcular">Calcular</button>
+    <p class="digitos">Tu número tiene @cantidadDigitosPrimos dígitos primos.</p>
+</div>
+
+@code {
+    private int numero = 0;
+    private int cantidadDigitosPrimos = 0;
+
+    private void Calcular()
+    {
+        cantidadDigitosPrimos = ContarDigitosPrimos(numero);
+    }
+
+    private int ContarDigitosPrimos(int numero)
+    {
+        int contador = 0;
+        while (numero > 0)
+        {
+            int digito = numero % 10;
+            if (EsPrimo(digito))
+            {
+                contador++;
+            }
+            numero /= 10;
+        }
+        return contador;
+    }
+
+    private bool EsPrimo(int numero)
+    {
+        if (numero <= 1) return false;
+        if (numero <= 3) return true;
+        if (numero % 2 == 0 || numero % 3 == 0) return false;
+
+        for (int i = 5; i * i <= numero; i += 6)
+        {
+            if (numero % i == 0 || numero % (i + 2) == 0)
+                return false;
+        }
+
+        return true;   
+
+    }
+}

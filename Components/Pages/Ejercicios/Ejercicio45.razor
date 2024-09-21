@@ -1,0 +1,63 @@
+@page "/ejercicio45"
+@rendermode InteractiveServer
+
+<PageTitle>Ejercicio45</PageTitle>
+
+<div>
+    <label for="matriz">Ingrese los elementos de la matriz separados por comas (4 filas de 4 elementos cada una):</label>
+    <input type="text" id="matriz" @bind="matrizInput" />
+</div>
+
+<div>
+    <br>
+    <label for="valor">Ingrese el valor a buscar:</label>
+    <input type="number" id="valor" @bind="valorBuscar" />
+</div>
+
+<button @onclick="ContarOcurrencias">Contar</button>
+
+<p>El valor aparece @ocurrencias veces en la matriz.</p>
+
+@code {
+    private string matrizInput="";
+    private int[,] matriz = new int[4, 4];
+    private int valorBuscar;
+    private int ocurrencias;
+
+    private void ContarOcurrencias()
+    {
+        // Convertir la cadena de entrada a una matriz de enteros
+        var filas = matrizInput.Split(',');
+        for (int i = 0; i < matriz.GetLength(0); i++)
+        {
+            var elementos = filas[i].Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            for (int j = 0; j < matriz.GetLength(1); j++)
+            {
+                if (int.TryParse(elementos[j], out matriz[i, j]))
+                {
+                    // Conversión exitosa
+                }
+                else
+                {
+                    // Manejar error de conversión
+                    Console.WriteLine("Error al convertir un número");
+                    return;
+                }
+            }
+        }
+
+        // Contar las ocurrencias del valor
+        ocurrencias = 0;
+       for (int i = 0; i < matriz.GetLength(0); i++)
+{
+    for (int j = 0; j < matriz.GetLength(1); j++)
+    {
+        if (matriz[i, j] == valorBuscar)
+        {
+            ocurrencias++;
+            Console.WriteLine($"El valor {valorBuscar} se encontró en la posición ({i}, {j})");
+        }
+    }
+}
+    }
+}

@@ -1,0 +1,32 @@
+@page "/ejercicio11"
+@rendermode InteractiveServer 
+
+<PageTitle>Ejercicio11</PageTitle>
+
+
+<div class="form-group">
+    <label for="txtNumero">Ingresa un número:</label>
+    <input type="number" class="form-control" id="txtNumero" @bind="numero" />
+</div>
+
+<div class="form-group">
+    <label for="txtDigito">Ingresa un dígito:</label>
+    <input type="number" class="form-control" id="txtDigito" @bind="digito" min="0" max="9" />
+</div>
+
+<div class="form-group">
+    <br>
+    <button class="btn btn-primary calcular-btn" @onclick="CalcularMultiplo">Calcular</button>
+    <p class="resultado">El resultado es: @resultado</p>
+</div>
+
+@code {
+    private int numero = 0;
+    private int digito = 0;
+    private int resultado = 0;
+
+    private void CalcularMultiplo()
+    {
+        resultado = numero % digito == 0 ? 1 : 0;
+    }
+}
